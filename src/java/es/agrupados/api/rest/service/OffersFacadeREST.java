@@ -46,8 +46,8 @@ public class OffersFacadeREST extends AbstractFacade<Offers> {
 
     /**
      * Find offer by ID
-     * Usage: http://localhost:8080/OffersREST/webresources/offers/1
-     * @param id
+     * Usage: "http://localhost:8080/OffersREST/webresources/offers/1"
+     * @param id id of the offer
      * @return Offers
      */
 
@@ -60,9 +60,8 @@ public class OffersFacadeREST extends AbstractFacade<Offers> {
 
     /**
      * Find all active offer.
-     * Usage: http://localhost:8080/OffersREST/webresources/offers/active/all
-     * 
-     * @return
+     * Usage: "http://localhost:8080/OffersREST/webresources/offers/active/all"
+     * @return List of offers
      */
     @GET
     @Path("active/all")
@@ -77,10 +76,10 @@ public class OffersFacadeREST extends AbstractFacade<Offers> {
 
     /**
      * Find by range
-     * Usage: http://localhost:8080/OffersREST/webresources/offers/1/10
+     * Usage: "http://localhost:8080/OffersREST/webresources/offers/1/10"
      * 
-     * @param from
-     * @param to
+     * @param from id of the offer
+     * @param to id of the offer
      * @return Lis of offers.
      */
     @GET
@@ -92,7 +91,7 @@ public class OffersFacadeREST extends AbstractFacade<Offers> {
 
     /**
      * Find total number of offers.
-     * Usage: http://localhost:8080/OffersREST/webresources/offers/count
+     * Usage: "http://localhost:8080/OffersREST/webresources/offers/count"
      * @return Integer sum of offers converted to String.
      */
     @GET
@@ -104,9 +103,9 @@ public class OffersFacadeREST extends AbstractFacade<Offers> {
     
     /**
      * Find by any keyword inside the offer's description
-     * Usage: http://localhost:8080/OffersREST/webresources/offers/description/gun
+     * Usage: "http://localhost:8080/OffersREST/webresources/offers/description/gun"
      * 
-     * @param keyWord
+     * @param keyWord any string that you want to query.
      * @return List of offers
      */
     @GET
@@ -123,9 +122,9 @@ public class OffersFacadeREST extends AbstractFacade<Offers> {
 
     /**
      * Find offers within a price range
-     * Usage: http://localhost:8080/OffersREST/webresources/offers/price?minPrice=1&maxPrice=70
-     * @param minPrice
-     * @param maxPrice
+     * Usage: "http://localhost:8080/OffersREST/webresources/offers/price?minPrice=1&amp;maxPrice=70"
+     * @param minPrice minimum price (float)
+     * @param maxPrice maximum price (float)
      * @return List of offers
      */
     @GET
@@ -143,9 +142,9 @@ public class OffersFacadeREST extends AbstractFacade<Offers> {
     
     /**
      * Find offers by user's location.
-     * Usage: http://localhost:8080/OffersREST/webresources/offers/location?lat=41.65606&lng=-0.87734
-     * @param latitude
-     * @param longitude
+     * Usage: "http://localhost:8080/OffersREST/webresources/offers/location?lat=41.65606&amp;lng=-0.87734"
+     * @param latitude latitude (double)
+     * @param longitude longiture (double)
      * @return List of offers
      */
     @GET
@@ -181,8 +180,8 @@ public class OffersFacadeREST extends AbstractFacade<Offers> {
     
     /**
      * Find by any keyword withing the offer's title.
-     * Usage: http://localhost:8080/OffersREST/webresources/offers?title=fer
-     * @param title
+     * Usage: "http://localhost:8080/OffersREST/webresources/offers?title=fer"
+     * @param title Any string that can be contained in the offer title
      * @return List of offers
      */
     @GET
@@ -196,11 +195,11 @@ public class OffersFacadeREST extends AbstractFacade<Offers> {
     
     /**
      * Find offers within a specified date range.
-     * Usage: http://localhost:8080/OffersREST/webresources/offers/date?start=01-03-2014&end=31-03-2019
-     * @param startDate
-     * @param endDate
+     * Usage: "http://localhost:8080/OffersREST/webresources/offers/date?start=01-03-2014&amp;end=31-03-2019"
+     * @param startDate start Date (dd-MM-yyyy)
+     * @param endDate end date (dd-MM-yyyy)
      * @return List of offers
-     * @throws ParseException
+     * @throws ParseException throws ParseException
      */
     @GET
     @Path("date")
