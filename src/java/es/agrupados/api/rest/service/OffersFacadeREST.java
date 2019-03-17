@@ -27,7 +27,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 /**
- *
+ * Class exposing REST web services methods.
  * @author mundakamacbook
  */
 @Stateless
@@ -39,31 +39,17 @@ public class OffersFacadeREST extends AbstractFacade<Offers> {
     
     @EJB
     private ApplicationUserDetailsFacadeREST usersDetailsFacade;
-    //private ApplicationUsersFacadeREST usersFacade;
 
     public OffersFacadeREST() {
         super(Offers.class);
     }
 
-//    @POST
-//    @Override
-//    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-//    public void create(Offers entity) {
-//        super.create(entity);
-//    }
-//
-//    @PUT
-//    @Path("{id}")
-//    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-//    public void edit(@PathParam("id") Integer id, Offers entity) {
-//        super.edit(entity);
-//    }
-//
-//    @DELETE
-//    @Path("{id}")
-//    public void remove(@PathParam("id") Integer id) {
-//        super.remove(super.find(id));
-//    }
+    /**
+     * Find offer by ID
+     * Usage: http://localhost:8080/OffersREST/webresources/offers/1
+     * @param id
+     * @return Offers
+     */
 
     @GET
     @Path("{id}")
@@ -72,8 +58,14 @@ public class OffersFacadeREST extends AbstractFacade<Offers> {
         return super.find(id);
     }
 
+    /**
+     * Find all active offer.
+     * Usage: http://localhost:8080/OffersREST/webresources/offers/active/all
+     * 
+     * @return
+     */
     @GET
-    @Path("all")
+    @Path("active/all")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<Offers> findAllActiveOffers() {
         List<Offers> activeOffers = super.findAll()
@@ -83,6 +75,14 @@ public class OffersFacadeREST extends AbstractFacade<Offers> {
         return activeOffers;
     }
 
+    /**
+     * Find by range
+     * Usage: http://localhost:8080/OffersREST/webresources/offers/1/10
+     * 
+     * @param from
+     * @param to
+     * @return Lis of offers.
+     */
     @GET
     @Path("{from}/{to}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
@@ -90,6 +90,11 @@ public class OffersFacadeREST extends AbstractFacade<Offers> {
         return super.findRange(new int[]{from, to});
     }
 
+    /**
+     * Find total number of offers.
+     * Usage: http://localhost:8080/OffersREST/webresources/offers/count
+     * @return Integer sum of offers converted to String.
+     */
     @GET
     @Path("count")
     @Produces(MediaType.TEXT_PLAIN)
@@ -97,6 +102,13 @@ public class OffersFacadeREST extends AbstractFacade<Offers> {
         return String.valueOf(super.count());
     }
     
+    /**
+     * Find by any keyword inside the offer's description
+     * Usage: http://localhost:8080/OffersREST/webresources/offers/description/gun
+     * 
+     * @param keyWord
+     * @return List of offers
+     */
     @GET
     @Path("description/{keyWord}")
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
@@ -108,6 +120,14 @@ public class OffersFacadeREST extends AbstractFacade<Offers> {
         return activeOffers;
         
     }
+
+    /**
+     * Find offers within a price range
+     * Usage: http://localhost:8080/OffersREST/webresources/offers/price?minPrice=1&maxPrice=70
+     * @param minPrice
+     * @param maxPrice
+     * @return List of offers
+     */
     @GET
     @Path("price")
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
@@ -121,6 +141,13 @@ public class OffersFacadeREST extends AbstractFacade<Offers> {
         return offersByPrice;
     }
     
+    /**
+     * Find offers by user's location.
+     * Usage: http://localhost:8080/OffersREST/webresources/offers/location?lat=41.65606&lng=-0.87734
+     * @param latitude
+     * @param longitude
+     * @return List of offers
+     */
     @GET
     @Path("location")
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
@@ -152,6 +179,12 @@ public class OffersFacadeREST extends AbstractFacade<Offers> {
         return offers;
     }
     
+    /**
+     * Find by any keyword withing the offer's title.
+     * Usage: http://localhost:8080/OffersREST/webresources/offers?title=fer
+     * @param title
+     * @return List of offers
+     */
     @GET
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public List<Offers> findByTitle(@QueryParam("title") String title){
@@ -161,6 +194,14 @@ public class OffersFacadeREST extends AbstractFacade<Offers> {
         return offers;
     }
     
+    /**
+     * Find offers within a specified date range.
+     * Usage: http://localhost:8080/OffersREST/webresources/offers/date?start=01-03-2014&end=31-03-2019
+     * @param startDate
+     * @param endDate
+     * @return List of offers
+     * @throws ParseException
+     */
     @GET
     @Path("date")
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
@@ -182,6 +223,10 @@ public class OffersFacadeREST extends AbstractFacade<Offers> {
         return offers;
     }    
     
+    /**
+     * Getter of Entity Manager
+     * @return EntityManager
+     */
     @Override
     protected EntityManager getEntityManager() {
         return em;
